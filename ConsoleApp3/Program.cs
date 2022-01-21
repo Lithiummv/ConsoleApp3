@@ -5,7 +5,7 @@ using LinqToExcel;
 
 namespace ConsoleApp3
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -14,9 +14,9 @@ namespace ConsoleApp3
             string pathProductPrice = @"..\..\..\..\ProductPrice.xlsx";
             List<Product> products = new();
             ExcelReader excelReader = new();
-            excelReader.ReadProductPrice(ref products, pathProductPrice);
-            excelReader.ReadProductList(ref products, pathProductList);
-            excelReader.ReadCustomerList(ref products, pathCustomersList);
+            excelReader.GetDataFromFirstFile(ref products, pathProductPrice);
+            excelReader.GetDataFromSecondFile(ref products, pathProductList);
+            excelReader.GetDataFromThirdFile(ref products, pathCustomersList);
             excelReader.SortAndOutput(ref products);
         }
     }

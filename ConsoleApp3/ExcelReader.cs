@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp3
 {
-    class ExcelReader
+    public class ExcelReader
     {
-        public void ReadProductPrice(ref List<Product> products, string path)
+        public void GetDataFromFirstFile(ref List<Product> products, string path)
         {
             ExcelQueryFactory productPrice = new(path);
             products = (from rowProductPrice in productPrice.Worksheet().ToList()
@@ -22,7 +22,7 @@ namespace ConsoleApp3
                         }).ToList();
         }
 
-        public void ReadProductList(ref List<Product> products, string path)
+        public void GetDataFromSecondFile(ref List<Product> products, string path)
         {
             ExcelQueryFactory productList = new(path);
             var product = from rowProductList in productList.Worksheet().ToList()
@@ -38,7 +38,7 @@ namespace ConsoleApp3
             }
         }
 
-        public void ReadCustomerList(ref List<Product> products, string path)
+        public void GetDataFromThirdFile(ref List<Product> products, string path)
         {
             ExcelQueryFactory customersList = new(path);
             var customers = from rowCustomersList in customersList.Worksheet().ToList()
@@ -59,12 +59,9 @@ namespace ConsoleApp3
 
         public void SortAndOutput(ref List<Product> products)
         {
-            products = (from product in products
-                        orderby product.Date
-                        select product).ToList();
+            Product product = products.OrderBy(x => x.Date).ElementAt(1);
 
-            Product secondProduct = products.Find(x => x.ProductId == 2);
-            Console.WriteLine("ProductId = " + secondProduct.ProductId + " ProductName = " + secondProduct.ProductName + " CustomerName = " + secondProduct.CustomerName + " Description = " + secondProduct.Description);
+            Console.WriteLine("ProductId = " + product.ProductId + " ProductName = " + product.ProductName + " CustomerName = " + product.CustomerName + " Description = " + product.Description);
         }
     }
 }

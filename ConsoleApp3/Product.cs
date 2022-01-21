@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp3
 {
-    class Product
+    public class Product
     {
         public int ProductId { get; set; }
         public int CustomerId { get; set; }
